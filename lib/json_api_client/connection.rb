@@ -6,15 +6,16 @@ module JsonApiClient
     def initialize(options = {})
       site = options.fetch(:site)
       connection_options = options.slice(:proxy, :ssl, :request, :headers, :params)
-      adapter_options = Array(options.fetch(:adapter, Faraday.default_adapter))
+      adapter_options = Array(options.fetch(:adapter, :net_http_persistent))
       status_middleware_options = {}
       status_middleware_options[:custom_handlers] = options[:status_handlers] if options[:status_handlers].present?
       @faraday = Faraday.new(site, connection_options) do |builder|
+        builder.adapter(*adapter_options)
         builder.request :json
         builder.use Middleware::JsonRequest
         builder.use Middleware::Status, status_middleware_options
-        builder.use Middleware::ParseJson
-        builder.use ::FaradayMiddleware::Gzip
+        builder.response :json
+        builder.use Middleware::Gzip
         builder.adapter(*adapter_options)
       end
       yield(self) if block_given?

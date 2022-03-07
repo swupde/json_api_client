@@ -1,5 +1,5 @@
 require 'faraday'
-require 'faraday_middleware'
+require 'faraday/net_http_persistent'
 require 'json'
 require 'addressable/uri'
 require 'json_api_client/formatter'
