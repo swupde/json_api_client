@@ -25,7 +25,7 @@ module JsonApiClient
     #   inserted middleware will run after json parsed
     def use(middleware, *args, &block)
       return if faraday.builder.locked?
-      faraday.builder.insert_before(Middleware::ParseJson, middleware, *args, &block)
+      faraday.builder.insert_before(Middleware::Gzip, middleware, *args, &block)
     end
 
     def delete(middleware)
