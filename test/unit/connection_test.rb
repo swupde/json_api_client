@@ -85,9 +85,7 @@ class ConnectionTest < MiniTest::Test
         headers: {
     	  'Accept'=>'application/vnd.api+json',
     	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-    	  'Connection'=>'keep-alive',
     	  'Content-Type'=>'application/vnd.api+json',
-    	  'Keep-Alive'=>'30',
     	  'User-Agent'=>'Faraday v2.2.0'
         }).
       to_return(status: 200, body: {data: [{id: "1", type: "regular_resources", attributes: {foo: "bar"}}]}.to_json, headers: {content_type: "application/vnd.api+json"})
@@ -119,9 +117,7 @@ class ConnectionTest < MiniTest::Test
         headers: {
         'Accept'=>'application/vnd.api+json',
         'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-        'Connection'=>'keep-alive',
         'Content-Type'=>'application/vnd.api+json',
-        'Keep-Alive'=>'30',
         'User-Agent'=>'Faraday v2.2.0'
         }).
       to_return(status: 200, body: body, headers: {content_type: "application/vnd.api+json", content_encoding: 'gzip'})
